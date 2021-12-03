@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>函数式组件</title>
+</head>
+<body>
+<!--    准备好一个容器-->
+    <div id="test"></div>
+<!--    引入react核心库-->
+    <script type="text/javascript" src="../../js/react.development.js"></script>
+<!--    引入react-dom，用于支持react操作dom-->
+    <script type="text/javascript" src="../../js/react-dom.development.js"></script>
+    <!--引入babel,用于将jsx转为js-->
+    <script type="text/javascript" src="../../js/babel.min.js"></script>
+    <!--此处写babel-->
+    <script type="text/babel">
+        // 创建类组件
+        class Weather extends React.Component{
+            constructor(pros) {
+                super(pros);
+                this.state = {isHot: false, wind: '威风'}
+                this.changeWeather = this.changeWeather.bind(this)
+            }
+
+            render() {
+                console.log(this);
+                // 读取状态
+                const {isHot, wind} = this.state
+                return <h1 onClick={this.changeWeather}>今天天气很 {isHot ? '炎热' : '凉爽'}， {wind}</h1>
+            }
+
+            changeWeather() {
+                const isHot = this.state.isHot
+                // 状态不可直接更改
+                // this.state.isHot = !isHot
+                this.setState({isHot:!isHot})
+                console.log(isHot)
+            }
+        }
+        // 渲染虚拟DOM到页面
+        ReactDOM.render(<Weather/>, document.getElementById('test'))
+        // const title = document.getElementById('title')
+        // title.addEventListener('click', ()=> {
+        //     console.log('点了')
+        // })
+        // title.onclick = () => {
+        //     console.log('dianle')
+        // }
+    </script>
+</body>
+</html>
