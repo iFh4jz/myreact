@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>使用jsx创建虚拟DOM</title>
+    <style>
+        .title {
+            background-color: aqua;
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+<!--    准备好一个容器-->
+    <div id="test"></div>
+<!--    引入react核心库-->
+    <script type="text/javascript" src="../js/react.development.js"></script>
+<!--    引入react-dom，用于支持react操作dom-->
+    <script type="text/javascript" src="../js/react-dom.development.js"></script>
+    <!--引入babel,用于将jsx转为js-->
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+    <!--此处写babel-->
+    <script type="text/babel">
+        const data = ['Augular', 'React', 'Vue']
+        // 创建虚拟DOM
+        const VDOM = (
+            <div>
+                <h1>
+                    前端js框架列表
+                </h1>
+                <ul>
+                    {
+                        data.map((item, index)=>{
+                            return <li key={index}>{item}</li>
+                        })
+                    }
+                </ul>
+            </div>
+        )
+        // console.log(VDOM)
+        // 渲染虚拟DOM到页面
+        ReactDOM.render(VDOM, document.getElementById('test'))
+    </script>
+</body>
+</html>
