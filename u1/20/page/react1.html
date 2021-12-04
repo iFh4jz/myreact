@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>非受控组件</title>
+    <title>受控组件</title>
 </head>
 <body>
 <!--    准备好一个容器-->
@@ -19,17 +19,29 @@
     <script type="text/babel">
         // 创建类组件
         class Login extends React.Component{
+            state = {
+                username:'',
+                password:''
+            }
             handleSubmit = (event) => {
                 event.preventDefault() // 阻止表单提交
-                const {username, password} = this
-                alert(`你输入的用户名: ${username.value}, 你输入的密码是: ${password.value}`)
+                const {username, password} = this.state
+                alert(`你输入的用户名: ${username}, 你输入的密码: ${password}`)
             }
 
+            saveUsername = (event) => {
+                this.setState({username:event.target.value})
+            }
+
+            savePassword = (event) => {
+                this.setState({password:event.target.value})
+            }
+            
             render() {
                 return (
                     <form onSubmit={this.handleSubmit}>
-                        用户名: <input ref={c=>this.username = c} type="text" name="username"></input>
-                        密码: <input ref={c=>this.password = c} type="password" name="password"></input>
+                        用户名: <input onChange={this.saveUsername} type="text" name="username"></input>
+                        密码: <input onChange={this.savePassword} type="password" name="password"></input>
                         <button>登陆</button>
                     </form>
                 )
